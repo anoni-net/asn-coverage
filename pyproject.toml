@@ -1,7 +1,7 @@
 [project]
-name = "ocftw-ooni-research-asn-coverage"
+name = "asn-coverage"
 version = "0.1.0"
-description = "About Tor, Tails, OONI data research in Taiwan"
+description = "ASN coverage analysis of OONI measurements, to find the networks that need more testing"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

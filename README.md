@@ -306,6 +306,23 @@ uv run python ooni.py span --start=2026/01/01 --end=2026/01/31 --loc=TW --chunk=
 - `count_asn()` 函數：ASN 統計邏輯
 - `RIPEData` 類別：RIPE 資料獲取
 
+## 📦 套件升級
+
+相依套件由 Dependabot 每週檢查一次，設定在 `.github/dependabot.yml`。`uv.lock` 的 Python 套件合成一個 PR，GitHub Actions 的版本另外開。
+
+每個 PR 都會執行兩支 workflow：`check-ripe.yml` 下載 RIPE 的 ASN 清單，`lookback-ooni.yml` 回溯台灣、日本、香港最近 36 小時的 OONI 資料，各在兩個 Ubuntu 版本與 Python 3.12、3.13 上執行。兩支每天也會排程執行一次，確認上游的資料來源仍然可用。
+
+手動升級：
+
+```bash
+uv lock --upgrade
+uv sync
+uv run python ripe.py list --loc TW
+uv run python ooni.py lookback --units=2 --loc=TW --frame=hours
+```
+
+boto3 與 botocore 的版本更新頻繁，`ooni.py` 用無簽章的方式讀 OONI 的公開 S3，升級之後執行一次 `lookback` 確認下載與解析都正常。
+
 ## 📄 授權
 
 GPL-3.0，詳見 [LICENSE](LICENSE)
@@ -628,6 +645,23 @@ For adding other data sources or analysis features, refer to:
 - `count_asn()` function: ASN statistics logic
 - `RIPEData` class: RIPE data retrieval
 
+## 📦 Upgrading Dependencies
+
+Dependabot checks dependencies weekly, configured in `.github/dependabot.yml`. Python packages in `uv.lock` are grouped into one PR, and GitHub Actions versions get their own.
+
+Every PR runs two workflows: `check-ripe.yml` downloads the RIPE ASN list, and `lookback-ooni.yml` looks back over the last 36 hours of OONI data for Taiwan, Japan and Hong Kong, each on two Ubuntu releases with Python 3.12 and 3.13. Both also run once a day on a schedule, to confirm the upstream data sources are still reachable.
+
+To upgrade by hand:
+
+```bash
+uv lock --upgrade
+uv sync
+uv run python ripe.py list --loc TW
+uv run python ooni.py lookback --units=2 --loc=TW --frame=hours
+```
+
+boto3 and botocore release often, and `ooni.py` reads OONI's public S3 bucket without signing. After an upgrade, run `lookback` once to confirm downloading and parsing still work.
+
 ## 📄 License
 
 GPL-3.0, see [LICENSE](LICENSE)
@@ -642,4 +676,4 @@ GPL-3.0, see [LICENSE](LICENSE)
 
 ---
 
-**Copyright © 2023-2025 anoni.net ASN Coverage Project**
+**Copyright © 2023-2026 anoni.net ASN Coverage Project**
