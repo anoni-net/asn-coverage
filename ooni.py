@@ -201,7 +201,7 @@ def lookback(units=36, loc='TW', frame='hour'):
             for num, date in enumerate(dates):
                 csv_write.writerow({'date': date[0].format('YYYY/MM/DD'),
                                     'hour': date[0].format('HH'),
-                                    'statistics': json.dumps(results[num]),
+                                    'statistics': json.dumps(results[num]).decode('utf-8'),
                                     'loc': loc,
                                     })
 
@@ -261,7 +261,7 @@ def span(start, end, loc='TW', chunk=40):
             for num, date in enumerate(dates):
                 csv_write.writerow({'date': date[0].format('YYYY/MM/DD'),
                                     'hour': date[0].format('HH'),
-                                    'statistics': json.dumps(results[num]),
+                                    'statistics': json.dumps(results[num]).decode('utf-8'),
                                     'loc': loc,
                                     })
                 result_total['counts'].update(results[num]['counts'])
@@ -288,11 +288,13 @@ def sheetrow(input_path):
             csv_writer.writeheader()
             for raw in csv_reader:
                 rows = []
-                if raw['statistics'][0] == 'b':
+                # 2026-10 之前的 CSV 把 orjson 回傳的 bytes 直接寫進欄位，存成 b'{...}'。
+                # 新的檔案寫的是 JSON 字串，舊檔照樣讀得回來。
+                if raw['statistics'].startswith("b'"):
                     raw['statistics'] = re.findall(
                         r"b'(.+)'", raw['statistics'])[0]
 
-                statistics = json.loads(bytes(raw['statistics'], 'UTF-8'))
+                statistics = json.loads(raw['statistics'])
                 asns = statistics['counts']
                 # CSV written before the blocking breakdown existed still reads,
                 # the blocking columns just stay at zero.
