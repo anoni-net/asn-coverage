@@ -4,7 +4,9 @@
 
 ![ooni asn data flow](img/ooni-asn.svg)
 
-ASN Coverage 是 anoni.net 專案的資料分析工具，用於解析 OONI（Open Observatory of Network Interference）觀測資料與各區域已知的 [ASN（自治系統編號）](https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/) 涵蓋狀況，評估測量資料是否平均分散在不同電信商與網路架構中。
+ASN Coverage 是 anoni.net 專案的資料分析工具，用於解析 OONI（Open Observatory of Network Interference）觀測資料與各區域已知的 [ASN（自治系統編號）](https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/) 涵蓋狀況，評估測量資料是否平均分散在不同電信商與網路架構中。分析結果寫在文件站的 [ASNs 自治網路觀測資料分析](https://anoni.net/docs/taiwan/ooni-asn-coverage/)。
+
+這個工具 2026-10 從 [`anoni-net/docs`](https://github.com/anoni-net/docs) 的 `asn_coverage/` 目錄拆出來，commit 歷史一併帶過來，舊 commit 訊息裡的 PR 編號寫成 `anoni-net/docs#123`。
 
 ## 🎯 專案目標
 
@@ -52,7 +54,8 @@ ASN Coverage 是 anoni.net 專案的資料分析工具，用於解析 OONI（Ope
 ### 安裝
 
 ```bash
-cd asn_coverage
+git clone https://github.com/anoni-net/asn-coverage.git
+cd asn-coverage
 uv sync
 ```
 
@@ -139,7 +142,7 @@ asns_20260208T12.csv
 ## 📁 專案結構
 
 ```
-asn_coverage/
+asn-coverage/
 ├── ooni.py           # OONI 資料分析主程式
 ├── ripe.py           # RIPE ASN 資料工具
 ├── pyproject.toml    # 專案依賴設定
@@ -305,7 +308,7 @@ uv run python ooni.py span --start=2026/01/01 --end=2026/01/31 --loc=TW --chunk=
 
 ## 📄 授權
 
-Apache License 2.0 - 詳見 [LICENSE](LICENSE) 檔案
+GPL-3.0，詳見 [LICENSE](LICENSE)
 
 ## 🔗 相關資源
 
@@ -323,7 +326,9 @@ Apache License 2.0 - 詳見 [LICENSE](LICENSE) 檔案
 
 ![ooni asn data flow](img/ooni-asn.svg)
 
-ASN Coverage is a data analysis tool for the anoni.net project, designed to parse OONI (Open Observatory of Network Interference) measurement data and analyze the coverage of known [ASNs (Autonomous System Numbers)](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/) in various regions, assessing whether measurement data is evenly distributed across different ISPs and network infrastructures.
+ASN Coverage is a data analysis tool for the anoni.net project, designed to parse OONI (Open Observatory of Network Interference) measurement data and analyze the coverage of known [ASNs (Autonomous System Numbers)](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/) in various regions, assessing whether measurement data is evenly distributed across different ISPs and network infrastructures. The analysis is published on the docs site as [ASN observation data analysis](https://anoni.net/docs/en/regional/ooni-asn-coverage/).
+
+The tool was split out of the `asn_coverage/` directory of [`anoni-net/docs`](https://github.com/anoni-net/docs) in 2026-10 with its commit history. Pull request numbers in the older commit messages are written as `anoni-net/docs#123`.
 
 ## 🎯 Project Goals
 
@@ -371,7 +376,8 @@ Retrieve global ASN information from RIPE NCC.
 ### Installation
 
 ```bash
-cd asn_coverage
+git clone https://github.com/anoni-net/asn-coverage.git
+cd asn-coverage
 uv sync
 ```
 
@@ -458,7 +464,7 @@ asns_20260208T12.csv
 ## 📁 Project Structure
 
 ```
-asn_coverage/
+asn-coverage/
 ├── ooni.py           # OONI data analysis main program
 ├── ripe.py           # RIPE ASN data tool
 ├── pyproject.toml    # Project dependencies
@@ -624,7 +630,7 @@ For adding other data sources or analysis features, refer to:
 
 ## 📄 License
 
-Apache License 2.0 - See [LICENSE](LICENSE) file
+GPL-3.0, see [LICENSE](LICENSE)
 
 ## 🔗 Related Resources
 

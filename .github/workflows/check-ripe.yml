@@ -1,0 +1,52 @@
+name: RIPE ASN name lists
+# 每日執行一次 ripe.py 的資料抓取，確認上游資料來源與相依套件仍然可用。
+# 2026-10 從 anoni-net/docs 搬過來，原本限定 asn_coverage/ 變動才觸發，獨立成 repo 之後不需要。
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 0 * * *"
+
+# 同一分支的新 push 取消還在跑的，不要疊在一起
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check_list:
+    # 沒有這一行時 job 會用預設的六小時上限。2026-08-19 有六個 run 卡在
+    # apt-get update（runner 的 apt mirror 沒有回應），一路佔著 runner 不放。
+    timeout-minutes: 30
+    strategy:
+      matrix:
+        os: ["ubuntu-22.04", "ubuntu-24.04"]
+        python-version: ["3.12", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      # runner image 本來就帶著 ca-certificates，這一步只是保險。失敗不該擋住整個
+      # job，2026-08-19 卡死的六個 run 全部都停在這裡。
+      - name: Install certificates
+        timeout-minutes: 5
+        continue-on-error: true
+        run: |
+          sudo apt-get update -o Acquire::Retries=3
+          sudo apt-get install -y ca-certificates
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@v8.1.0
+      - name: Sync Packages
+        run: uv sync
+      - name: Show packages
+        run: uv tree
+      - name: Run Download ASN Lists (ALL)
+        run: uv run ./ripe.py list
+      - name: Run Download ASN Lists (TW)
+        run: uv run ./ripe.py list --loc TW
