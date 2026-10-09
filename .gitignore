@@ -8,3 +8,6 @@ lookback_*.csv
 span_*.csv
 rows_*.csv
 asns_*.csv
+
+# 本機環境變數，不進版控。VS Code 的 python.envFile 會讀這個檔，內容通常只有 PYTHONPATH=./
+.env
