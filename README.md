@@ -1,10 +1,10 @@
-# ASN Coverage - OONI 觀測資料與 ASN 涵蓋率分析
+# OONI 觀測涵蓋率（ASN Coverage）
 
 > 分析 OONI 測量資料在各區域 ASN 的涵蓋狀況，協助識別測量盲點
 
 ![ooni asn data flow](img/ooni-asn.svg)
 
-ASN Coverage 是 anoni.net 專案的資料分析工具，用於解析 OONI（Open Observatory of Network Interference）觀測資料與各區域已知的 [ASN（自治系統編號）](https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/) 涵蓋狀況，評估測量資料是否平均分散在不同電信商與網路架構中。分析結果寫在文件站的 [ASNs 自治網路觀測資料分析](https://anoni.net/docs/taiwan/ooni-asn-coverage/)。
+ASN Coverage 是 anoni.net 社群 [OONI 觀測涵蓋率](https://anoni.net/projects/asn-coverage/)的命令列工具，用於解析 OONI（Open Observatory of Network Interference）觀測資料與各區域已知的 [ASN（自治系統編號）](https://www.cloudflare.com/zh-tw/learning/network-layer/what-is-an-autonomous-system/) 涵蓋狀況，評估測量資料是否平均分散在不同電信商與網路架構中。觀測頁用 OONI 的彙總 API 每天更新，需要網路類型或封鎖方式的細節時再用這支工具下載原始測量。早期的分析結果寫在文件站的 [ASN 自治網路觀測資料分析](https://anoni.net/docs/taiwan/ooni-asn-coverage/)，使用說明見 [ASN 觀測資料擷取與分析](https://anoni.net/docs/community/asn-coverage-howto/)。ASN Coverage 是程式與 repo 的代號，對讀者的名稱是 OONI 觀測涵蓋率。
 
 這個工具 2026-10 從 [`anoni-net/docs`](https://github.com/anoni-net/docs) 的 `asn_coverage/` 目錄拆出來，commit 歷史一併帶過來，舊 commit 訊息裡的 PR 編號寫成 `anoni-net/docs#123`。
 
@@ -337,13 +337,13 @@ GPL-3.0，詳見 [LICENSE](LICENSE)
 
 ---
 
-# ASN Coverage - OONI Measurement Data and ASN Coverage Analysis
+# OONI Coverage (ASN Coverage)
 
 > Analyze OONI measurement data coverage across regional ASNs to help identify measurement blind spots
 
 ![ooni asn data flow](img/ooni-asn.svg)
 
-ASN Coverage is a data analysis tool for the anoni.net project, designed to parse OONI (Open Observatory of Network Interference) measurement data and analyze the coverage of known [ASNs (Autonomous System Numbers)](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/) in various regions, assessing whether measurement data is evenly distributed across different ISPs and network infrastructures. The analysis is published on the docs site as [ASN observation data analysis](https://anoni.net/docs/en/regional/ooni-asn-coverage/).
+ASN Coverage is the command-line tool behind the anoni.net community's [OONI Coverage](https://anoni.net/en/projects/asn-coverage/), designed to parse OONI (Open Observatory of Network Interference) measurement data and analyze the coverage of known [ASNs (Autonomous System Numbers)](https://www.cloudflare.com/learning/network-layer/what-is-an-autonomous-system/) in various regions, assessing whether measurement data is evenly distributed across different ISPs and network infrastructures. The coverage page updates daily from OONI's aggregation API; this tool downloads raw measurements when you need network types or blocking methods. Earlier analysis is published on the docs site as [ASN observation data analysis](https://anoni.net/docs/en/regional/ooni-asn-coverage/), and the usage guide is [ASN observation data retrieval and analysis](https://anoni.net/docs/en/community/asn-coverage-howto/). ASN Coverage is the code name of the tool and repository; readers know it as OONI Coverage.
 
 The tool was split out of the `asn_coverage/` directory of [`anoni-net/docs`](https://github.com/anoni-net/docs) in 2026-10 with its commit history. Pull request numbers in the older commit messages are written as `anoni-net/docs#123`.
 
